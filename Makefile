@@ -20,14 +20,24 @@ endif
 # COMMANDS                                                                      #
 #################################################################################
 
+## Test correct majour version of Python installed 
+test_environment: 
+	$(PYTHON_INTERPRETER) test_environment.py
+
 ## Install Python Dependencies
 requirements: test_environment
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
+## Download data set and untar unzip
+download: requirements 
+	wget -P data/raw -q https://kdd.ics.uci.edu/databases/20newsgroups/20_newsgroups.tar.gz
+	tar xvfz data/raw/20_newsgroups.tar.gz -C data/raw
+
+
 ## Make Dataset
 data: requirements
-	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed
+	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed/data.parquet
 
 ## Delete all compiled Python files
 clean:
