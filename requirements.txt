@@ -12,4 +12,3 @@ vega==2.5.0
 pyarrow==0.11.1
 scikit-learn==0.21.2
 cloudpickle==1.2.1
-xgboost==1.1.0
