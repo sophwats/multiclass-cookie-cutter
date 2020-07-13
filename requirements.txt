@@ -1,4 +1,6 @@
 # external requirements
+click
+python-dotenv
 numpy
 pandas
 altair==3.2.0
