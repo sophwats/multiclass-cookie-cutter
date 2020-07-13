@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import logging
-from dotenv import find_dotenv, load_dotenv
 import pandas as pd
 import os
 
