@@ -37,6 +37,7 @@ download:
 
 ## Make Dataset
 data: 
+	echo pwd
 	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed/data.parquet
 
 ## Delete all compiled Python files
