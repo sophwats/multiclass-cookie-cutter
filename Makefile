@@ -8,7 +8,7 @@ PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 BUCKET = [OPTIONAL] your-bucket-for-syncing-data (do not include 's3://')
 PROFILE = default
 PROJECT_NAME = multiclass-cookie-cutter
-PYTHON_INTERPRETER = python3.6
+PYTHON_INTERPRETER = python
 
 ifeq (,$(shell which conda))
 HAS_CONDA=False
@@ -25,18 +25,18 @@ test_environment:
 	$(PYTHON_INTERPRETER) test_environment.py
 
 ## Install Python Dependencies
-requirements: test_environment
+requirements: 
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
 ## Download data set and untar unzip
-download: requirements 
+download: 
 	wget -P data/raw -q https://kdd.ics.uci.edu/databases/20newsgroups/20_newsgroups.tar.gz
 	tar xvfz data/raw/20_newsgroups.tar.gz -C data/raw
 
 
 ## Make Dataset
-data: requirements
+data: 
 	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed/data.parquet
 
 ## Delete all compiled Python files
