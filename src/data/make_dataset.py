@@ -18,6 +18,7 @@ def main(input_filepath, output_filepath):
     logger.info('making final data set from raw data')
     logger.info('import data, extract parts we want in a list')
     print("Testing")
+    print(os.getcwd())
     listOfFiles = list()
     for (dirpath, dirnames, filenames) in os.walk('input_filepath/20_newsgroups'):
         listOfFiles += [os.path.join(dirpath, file) for file in filenames]
