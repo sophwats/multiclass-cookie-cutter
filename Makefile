@@ -22,8 +22,10 @@ endif
 
 ## Test correct majour version of Python installed 
 test_environment: 
+	@echo "testing_env"
+	@echo "before"
 	$(PYTHON_INTERPRETER) test_environment.py
-
+	@echo "after"
 ## Install Python Dependencies
 requirements: test_environment
 	@echo "requirements"
