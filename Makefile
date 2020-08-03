@@ -26,6 +26,7 @@ test_environment:
 
 ## Install Python Dependencies
 requirements: test_environment
+	@echo "requirements"
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
@@ -42,15 +43,18 @@ data:
 
 ## Delete all compiled Python files
 clean:
+	@echo "clean"
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
 ## Lint using flake8
 lint:
+	@echo "lint"
 	flake8 src
 
 ## Upload Data to S3
 sync_data_to_s3:
+	@echo "tos3"
 ifeq (default,$(PROFILE))
 	aws s3 sync data/ s3://$(BUCKET)/data/
 else
@@ -59,6 +63,7 @@ endif
 
 ## Download Data from S3
 sync_data_from_s3:
+	@echo "froms3"
 ifeq (default,$(PROFILE))
 	aws s3 sync s3://$(BUCKET)/data/ data/
 else
@@ -67,6 +72,7 @@ endif
 
 ## Set up python interpreter environment
 create_environment:
+	@echo "createenv"
 ifeq (True,$(HAS_CONDA))
 		@echo ">>> Detected conda, creating conda environment."
 ifeq (3,$(findstring 3,$(PYTHON_INTERPRETER)))
