@@ -41,7 +41,7 @@ def main(input_filepath, output_filepath):
     logger.info('transform data to pandas dataframe')
     
     df = pd.DataFrame(data, columns = ['Message', 'Subject', 'Category'])
-    logger.info('stored data in data frame, shape %s', df.shape())
+    logger.info('stored data in data frame, shape %s', (df.shape,))
 
     logger.info('converting dataframe to parquet')
     df.to_parquet(os.path.join(os.getcwd(), output_filepath))
