@@ -19,12 +19,21 @@ def main(input_filepath, output_filepath):
     logger.info('import data, extract parts we want in a list')
     print("Testing")
     print(os.getcwd())
+    print(os.path.join(os.getcwd(), 'input_filepath/20_newsgroups'))
     listOfFiles = list()
     for (dirpath, dirnames, filenames) in os.walk('input_filepath/20_newsgroups'):
         listOfFiles += [os.path.join(dirpath, file) for file in filenames]
     print("here")
     print(listOfFiles)
     print(len(listOfFiles))
+    print("new_paths")
+    listOfFiles = list()
+    for (dirpath, dirnames, filenames) in os.walk(os.path.join(os.getcwd(), 'input_filepath/20_newsgroups')):
+        listOfFiles += [os.path.join(dirpath, file) for file in filenames]
+    print("here")
+    print(listOfFiles)
+    print(len(listOfFiles))
+    
     data=[]
     passed=[]
     for file in listOfFiles:
