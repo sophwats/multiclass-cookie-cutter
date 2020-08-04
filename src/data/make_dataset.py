@@ -17,21 +17,12 @@ def main(input_filepath, output_filepath):
     logger = logging.getLogger(__name__)
     logger.info('making final data set from raw data')
     logger.info('import data, extract parts we want in a list')
-    print("Testing")
-    print(os.getcwd())
-    print(os.path.join(os.getcwd(), input_filepath, '20_newsgroups'))
-    listOfFiles = list()
-    for (dirpath, dirnames, filenames) in os.walk('input_filepath/20_newsgroups'):
-        listOfFiles += [os.path.join(dirpath, file) for file in filenames]
-    print("here")
-    print(listOfFiles)
-    print(len(listOfFiles))
-    print("new_paths")
+   
     listOfFiles = list()
     for (dirpath, dirnames, filenames) in os.walk(os.path.join(os.getcwd(), input_filepath, '20_newsgroups')):
         listOfFiles += [os.path.join(dirpath, file) for file in filenames]
-    print("here")
-    print(listOfFiles)
+    
+    logger.info('found %f files', len(listOfFiles))
     print(len(listOfFiles))
     
     data=[]
@@ -50,10 +41,10 @@ def main(input_filepath, output_filepath):
     logger.info('transform data to pandas dataframe')
     
     df = pd.DataFrame(data, columns = ['Message', 'Subject', 'Category'])
-    #print(df.shape())
-    
-    logger.info('storing data in parquet file')
-    df.to_parquet(output_filepath)
+    logger.info('stored data in data frame, shape %s', (df.shape())
+
+    logger.info('converting dataframe to parquet')
+    df.to_parquet(os.path.join(os.getcwd(), output_filepath))
     
 
 if __name__ == '__main__':
