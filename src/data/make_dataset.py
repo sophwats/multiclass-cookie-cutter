@@ -9,8 +9,9 @@ import os
 
 @click.command()	
 @click.argument('input_filepath', type=click.Path(exists=True))	
-@click.argument('output_filepath', type=click.Path())
-def main(input_filepath, output_filepath):
+@click.argument('output_filepath_training', type=click.Path())
+@click.argument('output_filepath_testing', type=click.Path())
+def main(input_filepath, output_filepath_training, output_filepath_testing):
     """ Runs data processing scripts to turn raw data from (../raw) into
         cleaned data ready to be analyzed (saved in ../processed).
     """
@@ -28,11 +29,10 @@ def main(input_filepath, output_filepath):
     data=[]
     passed=[]
     for file in listOfFiles:
-    
         f = open(file, 'r') 
         try:
             lines = f.read()
-            data.append([lines.split('\n\n', 1)[1], lines.split('\nSubject: ', 1)[1].split('\n', 1)[0], file.split('/')[2]])
+            data.append([lines.split('\n\n', 1)[1], lines.split('\nSubject: ', 1)[1].split('\n', 1)[0], file.split('/')[-2]])
         except:
             passed.append(file.split('/')[2:])
             pass
@@ -43,8 +43,13 @@ def main(input_filepath, output_filepath):
     df = pd.DataFrame(data, columns = ['Message', 'Subject', 'Category'])
     logger.info('stored data in data frame, shape %s', (df.shape,))
 
+    train = df.sample(frac=0.7, random_state=504)
+    test = df.drop(train.index) #everything that isn't in the test set
+    logger.info('split data into training and testing')
+    
     logger.info('converting dataframe to parquet')
-    df.to_parquet(os.path.join(os.getcwd(), output_filepath))
+    train.to_parquet(os.path.join(os.getcwd(), output_filepath_training))
+    test.to_parquet(os.path.join(os.getcwd(), output_filepath_testing))
     
 
 if __name__ == '__main__':

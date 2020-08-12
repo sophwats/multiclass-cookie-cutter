@@ -32,7 +32,7 @@ download: requirements
 
 ## Make Dataset
 data: download
-	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed/data.parquet
+	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed/training.parquet data/processed/testing.parquet
 
 ## Delete all compiled Python files
 clean:
