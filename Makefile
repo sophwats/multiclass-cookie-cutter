@@ -27,7 +27,7 @@ requirements: test_environment
 ## Download data set and untar unzip
 download: requirements
 	wget -P data/raw -q https://kdd.ics.uci.edu/databases/20newsgroups/20_newsgroups.tar.gz 
-	tar xvfz data/raw/20_newsgroups.tar.gz -C data/raw
+	tar xfz data/raw/20_newsgroups.tar.gz -C data/raw
 
 
 ## Make Dataset
